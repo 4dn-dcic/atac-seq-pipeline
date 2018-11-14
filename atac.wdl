@@ -62,9 +62,6 @@ workflow atac {
 	String pipeline_type  	# ATAC-Seq (atac) or DNase-Seq (dnase)
 							# the only difference is that tn5 shiting is enabled for atac
 
-	### mandatory genome param
-	File genome_tsv 		# reference genome data TSV file including
-							# all important genome specific data file paths and parameters
 	Boolean paired_end
 
 	### optional but important
@@ -92,20 +89,19 @@ workflow atac {
 	String idr_rank = 'p.value' # IDR ranking method
 
 	### read genome data and paths
-	call read_genome_tsv { input:genome_tsv = genome_tsv }
-	File bowtie2_idx_tar = read_genome_tsv.genome['bowtie2_idx_tar']
-	File blacklist = read_genome_tsv.genome['blacklist']
-	File chrsz = read_genome_tsv.genome['chrsz']
-	String gensz = read_genome_tsv.genome['gensz']
-	File ref_fa = read_genome_tsv.genome['ref_fa']
+	File bowtie2_idx_tar
+	File blacklist
+	File chrsz
+	String gensz
+	File ref_fa
 	# genome data for ATAQC
-	File tss_enrich = read_genome_tsv.genome['tss_enrich']
-	File dnase = read_genome_tsv.genome['dnase']
-	File prom = read_genome_tsv.genome['prom']
-	File enh = read_genome_tsv.genome['enh']
-	File reg2map = read_genome_tsv.genome['reg2map']
-	File reg2map_bed = read_genome_tsv.genome['reg2map_bed']
-	File roadmap_meta = read_genome_tsv.genome['roadmap_meta']
+	File tss_enrich
+	File dnase
+	File prom
+	File enh
+	File reg2map
+	File reg2map_bed
+	File roadmap_meta
 
 	### pipeline starts here
 	# temporary 2-dim arrays for DNANexus style fastqs and adapters	
@@ -567,6 +563,7 @@ task trim_adapter { # trim adapters and merge trimmed fastqs
 		Array[File] trimmed_merged_fastqs = glob("merge_fastqs_R?_*.fastq.gz")
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : select_first([cpu,2])
 		memory : "${select_first([mem_mb,'12000'])} MB"
 		time : select_first([time_hr,24])
@@ -606,6 +603,7 @@ task bowtie2 {
 		File read_len_log = glob("*.read_length.txt")[0] # read_len
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : select_first([cpu,4])
 		memory : "${select_first([mem_mb,'20000'])} MB"
 		time : select_first([time_hr,48])
@@ -654,6 +652,7 @@ task filter {
 		File mito_dup_log = if select_first([no_dup_removal,false]) then glob("null")[0] else glob("*.mito_dup.txt")[0] # mito_dups, fract_dups_from_mito
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : select_first([cpu,2])
 		memory : "${select_first([mem_mb,'20000'])} MB"
 		time : select_first([time_hr,24])
@@ -690,6 +689,7 @@ task bam2ta {
 		File ta = glob("*.tagAlign.gz")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : select_first([cpu,2])
 		memory : "${select_first([mem_mb,'10000'])} MB"
 		time : select_first([time_hr,6])
@@ -715,6 +715,7 @@ task spr { # make two self pseudo replicates
 		File ta_pr2 = glob("*.pr2.tagAlign.gz")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "${select_first([mem_mb,'16000'])} MB"
 		time : 1
@@ -770,6 +771,7 @@ task xcor {
 		Int fraglen = read_int(glob("*.cc.fraglen.txt")[0])
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : select_first([cpu,2])
 		memory : "${select_first([mem_mb,'16000'])} MB"
 		time : select_first([time_hr,6])
@@ -819,6 +821,7 @@ task macs2 {
 		File frip_qc = glob("*.frip.qc")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "${select_first([mem_mb,'16000'])} MB"
 		time : select_first([time_hr,24])
@@ -866,6 +869,7 @@ task idr {
 		File frip_qc = if defined(ta) then glob("*.frip.qc")[0] else glob("null")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "8000 MB"
 		time : 1
@@ -905,6 +909,7 @@ task overlap {
 		File frip_qc = if defined(ta) then glob("*.frip.qc")[0] else glob("null")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "4000 MB"
 		time : 1
@@ -943,6 +948,7 @@ task reproducibility {
 		File reproducibility_qc = glob("*reproducibility.qc")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "4000 MB"
 		time : 1
@@ -1034,6 +1040,7 @@ task ataqc { # generate ATAQC report
 		File txt = glob("*_qc.txt")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "${select_first([mem_mb,'16000'])} MB"
 		time : select_first([time_hr,24])
@@ -1133,6 +1140,7 @@ task qc_report {
 		Boolean qc_json_match = read_int("qc_json_match.txt")==0
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "4000 MB"
 		time : 1
@@ -1242,6 +1250,7 @@ task compare_md5sum {
 		String json_str = read_string('result.json') # details (string)
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "4000 MB"
 		time : 1
