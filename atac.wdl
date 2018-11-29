@@ -93,15 +93,15 @@ workflow atac {
 	File blacklist
 	File chrsz
 	String gensz
-	File ref_fa
+	File? ref_fa
 	# genome data for ATAQC
-	File tss_enrich
-	File dnase
-	File prom
-	File enh
-	File reg2map
-	File reg2map_bed
-	File roadmap_meta
+	File? tss_enrich
+	File? dnase
+	File? prom
+	File? enh
+	File? reg2map
+	File? reg2map_bed
+	File? roadmap_meta
 
 	### pipeline starts here
 	# temporary 2-dim arrays for DNANexus style fastqs and adapters	
