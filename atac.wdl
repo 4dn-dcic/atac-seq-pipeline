@@ -93,15 +93,15 @@ workflow atac {
 	File blacklist
 	File chrsz
 	String gensz
-	File? ref_fa = "null"
+	File? ref_fa
 	# genome data for ATAQC
-	File? tss_enrich = "null"
-	File? dnase = "null"
-	File? prom = "null"
-	File? enh = "null"
-	File? reg2map = "null"
-	File? reg2map_bed = "null"
-	File? roadmap_meta = "null"
+	File? tss_enrich
+	File? dnase
+	File? prom
+	File? enh
+	File? reg2map
+	File? reg2map_bed
+	File? roadmap_meta
 
 	### pipeline starts here
 	# temporary 2-dim arrays for DNANexus style fastqs and adapters	
@@ -449,7 +449,7 @@ workflow atac {
 
 	# ATAQC is available only when pipeline starts from fastqs, take fastqs[] as base array for ataqc
 	Array[Array[Array[File]]] fastqs_ataqc = 
-		if basename(tss_enrich)=='null' || disable_ataqc || align_only || true_rep_only then [] else fastqs_
+		if disable_ataqc || basename(tss_enrich)=='null' || align_only || true_rep_only then [] else fastqs_
 
 	scatter( i in range(length(fastqs_ataqc)) ) {
 		call ataqc { input : 
