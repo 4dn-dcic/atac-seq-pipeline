@@ -449,7 +449,7 @@ workflow atac {
 
 	# ATAQC is available only when pipeline starts from fastqs, take fastqs[] as base array for ataqc
 	Array[Array[Array[File]]] fastqs_ataqc = 
-		if disable_ataqc || basename(tss_enrich)=='null' || align_only || true_rep_only then [] else fastqs_
+		if disable_ataqc || align_only || true_rep_only then [] else fastqs_
 
 	scatter( i in range(length(fastqs_ataqc)) ) {
 		call ataqc { input : 
