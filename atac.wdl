@@ -522,7 +522,8 @@ workflow atac {
 	output {
 		File report = qc_report.report
 		File qc_json = qc_report.qc_json
-		Boolean qc_json_match = qc_report.qc_json_match
+                File sig_fc = select_first([macs2_pooled.sig_fc, macs2.sig_fc[0]])
+                File peak_calls = select_first([macs2_pooled.bfilt_npeak_bb, macs2.bfilt_npeak_bb[0]])
 	}
 }
 
