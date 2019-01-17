@@ -519,12 +519,6 @@ workflow atac {
 		ataqc_htmls = ataqc.html,
 	}
 
-	output {
-		File report = qc_report.report
-		File qc_json = qc_report.qc_json
-                File sig_fc = select_first([macs2_pooled.sig_fc, macs2.sig_fc[0]])
-                File peak_calls = select_first([macs2_pooled.bfilt_npeak_bb, macs2.bfilt_npeak_bb[0]])
-	}
 }
 
 task trim_adapter { # trim adapters and merge trimmed fastqs
