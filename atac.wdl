@@ -89,12 +89,12 @@ workflow atac {
 	String idr_rank = 'p.value' # IDR ranking method
 
 	### read genome data and paths
-	File bowtie2_idx_tar
+	File? bowtie2_idx_tar
 	File blacklist
 	File chrsz
 	String gensz
-	File? ref_fa
 	# genome data for ATAQC
+	File? ref_fa
 	File? tss_enrich
 	File? dnase
 	File? prom
@@ -519,6 +519,22 @@ workflow atac {
 		ataqc_htmls = ataqc.html,
 	}
 
+        # global output definition
+        if(length(bam2ta.ta)>0) { File first_ta = bam2ta.ta[0] }
+        if(!align_only) {
+            File sig_fc_rep1 = macs2.sig_fc[0]
+            if (length(tas_)>1) {
+                File? sig_fc_pooled = macs2_pooled.sig_fc
+            }
+        }
+        output {
+            first_ta
+            File optimal_peak = select_first([reproducibility_overlap.optimal_peak_bb, ''])
+            File conservative_peak = select_first([reproducibility_overlap.conservative_peak_bb, ''])
+            File sig_fc = select_first([sig_fc_pooled, sig_fc_rep1, ''])
+            File report = qc_report.report
+            File qc_json = qc_report.qc_json
+        }
 }
 
 task trim_adapter { # trim adapters and merge trimmed fastqs
