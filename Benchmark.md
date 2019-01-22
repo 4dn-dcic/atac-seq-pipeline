@@ -11,7 +11,7 @@ The following is a tentative benchmarking result based on a test sample.
 |   | **Measured** | **Recommended/Estimated** |
 | - |-------- | --------- | 
 | mem | 4.5G | 8GB |
-| disk | 50% (48.4GB) | 10x fastq + bowtie |
+| disk | 50% (48.4GB) | 10x fastq + bowtie (x1.5 to account for sample variability) |
 | CPU | 99.9% (16cores) | `atac.bowtie2.cpu` |
 | runtime | 7hr | 1.3h x fastq for 16-core c instance |
 | instance | c4.4xlarge | c5.xlarge (8GB mem, 4 cores, $0.17/hr) |
@@ -25,10 +25,10 @@ The following is a tentative benchmarking result based on a test sample.
 |   | **Measured** | **Recommended/Estimated** |
 | - |-------- | --------- |
 | mem | 4.2G | 8GB |
-| disk | 19.4% (19GB) | 25x tas |
-| CPU | 18% | 1 |
+| disk | 19.4% (19GB) | 25x tas (x1.5 to account for sample variability) |
+| CPU | 18% | 3 |
 | runtime | 2hr | 2.4h x tas for c instance |
-| instance | c4.4xlarge | m5a.large (8GB mem, 2 cores, $0.086/hr) |
-| runtime on recommended instance | - | 3h x fastq (2.5hr for the current input) | 
+| instance | c4.4xlarge | c5.xlarge (8GB mem, 4 cores, $0.17/hr) |
+| runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | 
 
 
