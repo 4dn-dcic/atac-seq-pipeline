@@ -15,7 +15,7 @@ The following is a tentative benchmarking result based on a test sample.
 | CPU | 99.9% (16cores) | `atac.bowtie2.cpu` |
 | runtime | 7hr | 1.3h x fastq for 16-core c instance |
 | instance | c4.4xlarge | c5.xlarge (8GB mem, 4 cores, $0.17/hr) |
-| runtime on recommended instance | - | 4.5h x fastq (24hr for the current input) |
+| estiamted runtime on recommended instance | - | 4.5h x fastq (24hr for the current input) |
 | output size | 827MB (tas) | 0.2x fastq |
 
 * notes : `atac.bowtie2.cpu`= 4 is recommended because memory is fixed to 8GB and the maximum number of CPUs on AWS instances with 8GB mem is 4.
@@ -23,15 +23,15 @@ The following is a tentative benchmarking result based on a test sample.
 ### Postaln (align-only=false, starting from tas)
 
 
-|   | **Measured** | **Recommended/Estimated** |
+|   | **Measured** | **Recommended/Estimated** | **Measured after Recommended run** | **Recommended/Estimated (adjusted)** |
 | - |-------- | --------- |
-| input size | 827MB (tas) | - |
-| param | - | - | 
-| mem | 4.2G | 8GB |
-| disk | 19.4% (19GB) | 25x tas (x1.5 to account for sample variability) |
-| CPU | 18% | 3 |
-| runtime | 2hr | 2.4h x tas for c instance |
-| instance | c4.4xlarge | c5.xlarge (8GB mem, 4 cores, $0.17/hr) |
-| runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | 
-| output size | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas |
+| input size | 827MB (tas) | - | 827MB (tas) | - |
+| param | - | - | - | - |
+| mem | 7.3G | 8GB | 7.1GB | 8GB |
+| disk | 44.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) | 66.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) |
+| CPU | 67.7% (11) | 12 | 64%% (11) | 12 |
+| runtime | 2hr | 2.4h x tas for c instance | 1hr 20min | 1.6h x tas for c5 instance |
+| instance | c4.4xlarge | c5.4xlarge (32GB mem, 16 cores, $0.68/hr) | c5.4xlarge | c5.4xlarge |
+| estimated runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | - | 1.6h x tas |
+| output size | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas |
 
