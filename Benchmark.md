@@ -24,7 +24,7 @@ The following is a tentative benchmarking result based on a test sample.
 
 
 |   | **Measured** | **Recommended/Estimated** | **Measured after Recommended run** | **Recommended/Estimated (adjusted)** |
-| - |-------- | --------- |
+| - | -------- | --------- | -------- | --------- |
 | input size | 827MB (tas) | - | 827MB (tas) | - |
 | param | - | - | - | - |
 | mem | 7.3G | 8GB | 7.1GB | 8GB |
