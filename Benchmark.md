@@ -25,7 +25,6 @@ The following is a tentative benchmarking result based on a test sample.
 
 |   | **Measured** | **Recommended/Estimated** | **Measured after Recommended run** | **Recommended/Estimated (adjusted)** |
 | - | -------- | --------- | -------- | --------- |
-| AWSEM job id | R6NetOYXEmq8 | - | JayG50nKBqXT | - |
 | input size | 827MB (tas) | - | 827MB (tas) | - |
 | param | - | - | - | - |
 | mem | 7.3G | 8GB | 7.1GB | 8GB |
@@ -35,5 +34,6 @@ The following is a tentative benchmarking result based on a test sample.
 | instance | c4.4xlarge | c5.4xlarge (32GB mem, 16 cores, $0.68/hr) | c5.4xlarge | c5.4xlarge |
 | estimated runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | - | 1.6h x tas |
 | output size | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas |
+| AWSEM job id | R6NetOYXEmq8 | - | JayG50nKBqXT | - |
 | cost | $1.67 | - | *$0.85?* | ~$1 per GB tas |
 
