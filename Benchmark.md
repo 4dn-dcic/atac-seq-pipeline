@@ -6,17 +6,19 @@ The following is a tentative benchmarking result based on a test sample.
 
 ### Aln (align-only=true, starting from fastq)
 
-|   | **Measured** | **Recommended/Estimated** |
-| - |-------- | --------- | 
-| input size | 1.2 * 2 + 1.5 * 2 = 5.2GB (fastq) + 3.9GB (bowtie) | - |
-| param | `atac.bowtie2.cpu`= 16 | `atac.bowtie2.cpu`= 4 |
-| mem | 4.5G | 8GB |
-| disk | 50% (48.4GB) | 10x fastq + bowtie (x1.5 to account for sample variability) |
-| CPU | 99.9% (16cores) | `atac.bowtie2.cpu` |
-| runtime | 7hr | 1.3h x fastq for 16-core c instance |
-| instance | c4.4xlarge | c5.xlarge (8GB mem, 4 cores, $0.17/hr) |
-| estiamted runtime on recommended instance | - | 4.5h x fastq (24hr for the current input) |
-| output size | 827MB (tas) | 0.2x fastq |
+|   | **Measured** | **Recommended/Estimated** | **Measured after Recommended run** | **Recommended/Estimated (adjusted)** |
+| - | -------- | --------- | -------- | --------- |
+| input size | 1.2 * 2 + 1.5 * 2 = 5.2GB (fastq) + 3.9GB (bowtie) | - | 1.2 * 2 + 1.5 * 2 = 5.2GB (fastq) + 3.9GB (bowtie) | - |
+| param | `atac.bowtie2.cpu`= 16 | `atac.bowtie2.cpu`= 4 | `atac.bowtie2.cpu`= 4 | `atac.bowtie2.cpu`= 4 |
+| mem | 4.5G | 8GB | 6.9GB | 8GB |
+| disk | 50% (48.4GB) | 10x fastq + bowtie (x1.5 to account for sample variability) | 77.3% (71.4GB) | 10x fastq + bowtie (x1.5 to account for sample variability) |
+| CPU | 99.9% (16cores) | `atac.bowtie2.cpu` | 99.4% most of the time (very good) | `atac.bowtie2.cpu` |
+| runtime | 7hr | 1.3h x fastq for 16-core c instance | 11.5hr | 2.2h x fastq for 4-core c5 instance |
+| instance | c4.4xlarge | c5.xlarge (8GB mem, 4 cores, $0.17/hr) | c5.xlarge | c5.xlarge |
+| estiamted runtime on recommended instance | - | 4.5h x fastq (24hr for the current input) | - | 2.2h x fastq |
+| output size | 827MB (tas) | 0.2x fastq | 827MB (tas) | 0.2x fastq |
+| AWSEM job id | UNA6eu2l9L5v | - | 8kL7te9yMcEd | - |
+| cost | $5.45 | ~$1 per GB fastq | $1.02 | ~$0.2 per GB fastq |
 
 * notes : `atac.bowtie2.cpu`= 4 is recommended because memory is fixed to 8GB and the maximum number of CPUs on AWS instances with 8GB mem is 4.
 
