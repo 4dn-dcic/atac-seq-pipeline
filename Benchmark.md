@@ -37,5 +37,5 @@ The following is a tentative benchmarking result based on a test sample.
 | estimated runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | - | 1.6h x tas |
 | output size | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas |
 | AWSEM job id | R6NetOYXEmq8 | - | JayG50nKBqXT | - |
-| cost | $1.67 | - | *$0.85?* | ~$1 per GB tas |
+| cost | $1.67 | - | $0.9 | ~$1 per GB tas |
 
