@@ -15,7 +15,7 @@ The following is a tentative benchmarking result based on a test sample.
 | CPU | 99.9% (16cores) | `atac.bowtie2.cpu` |
 | runtime | 7hr | 1.3h x fastq for 16-core c instance |
 | instance | c4.4xlarge | c5.xlarge (8GB mem, 4 cores, $0.17/hr) |
-| runtime on recommended instance | - | 6.5h x fastq (35hr for the current input) |
+| runtime on recommended instance | - | 4.5h x fastq (24hr for the current input) |
 | output size | 827MB (tas) | 0.2x fastq |
 
 * notes : `atac.bowtie2.cpu`= 4 is recommended because memory is fixed to 8GB and the maximum number of CPUs on AWS instances with 8GB mem is 4.
