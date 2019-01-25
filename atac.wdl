@@ -746,6 +746,7 @@ task pool_ta {
 		File ta_pooled = glob("*.tagAlign.gz")[0]
 	}
 	runtime {
+                docker: "4dndcic/encode-atacseq:v1"
 		cpu : 1
 		memory : "4000 MB"
 		time : 1
