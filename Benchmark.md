@@ -51,7 +51,7 @@ The following is a tentative benchmarking result based on a test sample.
 | param | - | - | - | - |
 | mem | 7.3G | 8GB | 7.1GB | 8GB |
 | disk | 44.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) | 66.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) |
-| CPU | 67.7% (11) | 12 | 64%% (11) | 12 |
+| CPU | 67.7% (11) | 12 | 64% (11) | 12 |
 | runtime | 2hr | 2.4h x tas for c instance | 1hr 20min | 1.6h x tas for c5 instance |
 | instance | c4.4xlarge | c5.4xlarge (32GB mem, 16 cores, $0.68/hr) | c5.4xlarge | c5.4xlarge |
 | estimated runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | - | 1.6h x tas |
