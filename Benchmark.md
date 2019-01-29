@@ -33,7 +33,7 @@ The following is a tentative benchmarking result based on a test sample.
 | disk | 10x fastq + bowtie (x1.5 to account for sample variability) | 77.3% (71.4GB) | 10x fastq + 5x bowtie (x1.5 to account for sample variability) | 57.2% (24.1G) | 52.4% (27.3G) | 10x fastq + 2.5x bowtie x nTechRep (x1.5 to account for sample variability) |
 | CPU | `atac.bowtie2.cpu` | 99.4% most of the time (very good) | `atac.bowtie2.cpu` | 99.2% most of the time (very good) | 99% most of the time (very good) | `atac.bowtie2.cpu` |
 | runtime | 2.2h x fastq for 4-core c5 instance | 10hr | 1.9h x fastq for 4-core c5 instance | 4.75hr | 5.4hr | 1.9h x fastq for 4-core c5 instance |
-| instance | c5.xlarge (8GB mem, 4 cores, $0.17/hr) | c5.xlarge | c5.xlarge | c5.xlarge | c5.xlarge | c5.xlarge | c5.xlarge for 1~2 TechReps, m5a.xlarge(16G mem, 4 cores, $0.172/hr) |
+| instance | c5.xlarge (8GB mem, 4 cores, $0.17/hr) | c5.xlarge | c5.xlarge | c5.xlarge | c5.xlarge | c5.xlarge for 1~2 TechReps, m5a.xlarge(16G mem, 4 cores, $0.172/hr) |
 | estiamted runtime on recommended instance | 2.2h x fastq | - | 1.9h x fastq | - | - | 1.9h x fastq |
 | output size | 0.2x fastq | 827MB (tas) | 0.2x fastq | 399MB (tas) | 430MB (tas) | 0.2x fastq |
 | AWSEM job id | - | DFudNc9O6t60 | - | 61DTYRnMBvJG | vECdwK6RspY1 | - |
