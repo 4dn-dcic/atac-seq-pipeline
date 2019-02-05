@@ -30,7 +30,7 @@ The following is a tentative benchmarking result based on a test sample.
 | input size | - | 1.2 * 2 + 1.5 * 2 = 5.2GB (fastq) + 3.9GB (bowtie) | - | 1.2 * 2 = 2.4G (fastq) + 3.9G (bowtie) | 1.5 * 2 = 3G (fastq) + 3.9GB (bowtie) | - |
 | param | `atac.bowtie2.cpu`= 4 | `atac.bowtie2.cpu`= 4 | `atac.bowtie2.cpu`= 4 | `atac.bowtie2.cpu`= 4 | `atac.bowtie2.cpu`= 4 | `atac.bowtie2.cpu`= 4 |
 | mem | 8GB | 6.9GB | 8GB | 4.3GB | 4.9G | 6G + 2Gx (nTechRep-1) |
-| disk | 10x fastq + bowtie (x1.5 to account for sample variability) | 77.3% (71.4GB) | 10x fastq + 5x bowtie (x1.5 to account for sample variability) | 57.2% (24.1G) | 52.4% (27.3G) | 10x fastq + 2.5x bowtie x nTechRep (x1.5 to account for sample variability) |
+| disk | 10x fastq + bowtie (x1.5 to account for sample variability) | 77.3% (71.4GB) | 10x fastq + 5x bowtie (x1.5 to account for sample variability) | 57.2% (24.1G) | 52.4% (27.3G) | (5x fastq + 2.5x bowtie) x nTechRep (x1.5 to account for sample variability) |
 | CPU | `atac.bowtie2.cpu` | 99.4% most of the time (very good) | `atac.bowtie2.cpu` | 99.2% most of the time (very good) | 99% most of the time (very good) | `atac.bowtie2.cpu` |
 | runtime | 2.2h x fastq for 4-core c5 instance | 10hr | 1.9h x fastq for 4-core c5 instance | 4.75hr | 5.4hr | 1.9h x fastq for 4-core c5 instance |
 | instance | c5.xlarge (8GB mem, 4 cores, $0.17/hr) | c5.xlarge | c5.xlarge | c5.xlarge | c5.xlarge | c5.xlarge for 1~2 TechReps, m5a.xlarge(16G mem, 4 cores, $0.172/hr) |
@@ -40,7 +40,7 @@ The following is a tentative benchmarking result based on a test sample.
 | cost | ~$0.37 per GB fastq | $1.65 | ~$0.32 per GB fastq | $0.79 | $0.9 | ~$0.32 per GB fastq |
 
 * notes : `atac.bowtie2.cpu`= 4 is recommended because memory is fixed to 8GB and the maximum number of CPUs on AWS instances with 8GB mem is 4.
-
+* notes : we know from more runs involving much larger fastq file that memory doesn't increase with fastq size.
 
 ### Postaln (align-only=false, starting from tas) with a single biological replicate
 
