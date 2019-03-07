@@ -45,8 +45,8 @@ The following is a tentative benchmarking result based on a test sample.
 ### Postaln (align-only=false, starting from tas) with a single biological replicate
 
 
-|   | **Measured** | **Recommended/Estimated** | **Measured after Recommended run** | **Recommended/Estimated (adjusted)** | **Measured after Recommende run** | **Recommended/Estimated (adjusted)** |
-| - | -------- | --------- | -------- | --------- | --------- | --------- |
+|   | **Measured** | **Recommended/Estimated** | **Measured after Recommended run** | **Recommended/Estimated (adjusted)** | **Measured after Recommende run** | **Recommended/Estimated (adjusted)** | **Measured after Recommende run** |
+| - | -------- | --------- | -------- | --------- | --------- | --------- | --------- |
 | input size | 827MB (tas) | - | 827MB (tas) | - | 430MB + 399MB = 829MB (tas) | - | 430MB + 399MB = 829MB (tas) |
 | param | - | - | - | - | - | - | - |
 | input specific | pe, input unsorted | - | pe, input unsorted | - | pe, input unsorted | - | pe, input sorted chr1,10,11... |
