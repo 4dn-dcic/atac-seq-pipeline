@@ -47,15 +47,16 @@ The following is a tentative benchmarking result based on a test sample.
 
 |   | **Measured** | **Recommended/Estimated** | **Measured after Recommended run** | **Recommended/Estimated (adjusted)** | **Measured after Recommende run** | **Recommended/Estimated (adjusted)** |
 | - | -------- | --------- | -------- | --------- | --------- | --------- |
-| input size | 827MB (tas) | - | 827MB (tas) | - | 430MB + 399MB = 829MB (tas) | - |
-| param | - | - | - | - | - | - |
-| mem | 7.3G | 8GB | 7.1GB | 8GB | 12.4G | 8G + 4Gx (nRep-1) |
-| disk | 44.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) | 66.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) | 91.5% (60G) | 55x tas + 16x (nRep-1)  (x1.5 for sample variability) |
-| CPU | 67.7% (11) | 12 | 64% (11) | 12 | 98.7% (16) | 12 + 4x (nRep-1) |
-| runtime | 2hr | 2.4h x tas for c instance | 1hr 20min | 1.6h x tas for c5 instance | 1hr 45min | 1.6hx tas + 0.4x (nRep-1) for c5 instance |
-| instance | c4.4xlarge | c5.4xlarge (32GB mem, 16 cores, $0.68/hr) | c5.4xlarge | c5.4xlarge | c5.4xlarge | c5.4xlarge |
-| estimated runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | - | 1.6h x tas | - | 1.6hx tas + 0.4x (nRep-1) |
-| output size | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas |
-| AWSEM job id | R6NetOYXEmq8 | - | JayG50nKBqXT | - | cINxqwUSnLz8 | - |
-| cost | $1.67 | - | $0.9 | ~$1 per GB tas | $1.2 | ~$1 per GB tas + $0.3x (nRep-1) |
+| input size | 827MB (tas) | - | 827MB (tas) | - | 430MB + 399MB = 829MB (tas) | - | 430MB + 399MB = 829MB (tas) |
+| param | - | - | - | - | - | - | - |
+| input specific | pe, input unsorted | - | pe, input unsorted | - | pe, input unsorted | - | pe, input sorted chr1,10,11... |
+| mem | 7.3G | 8GB | 7.1GB | 8GB | 12.4G | 8G + 4Gx (nRep-1) | 10.5G |
+| disk | 44.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) | 66.7% (43.9GB) | 55x tas (x1.5 to account for sample variability) | 91.5% (60G) | 55x tas + 16x (nRep-1)  (x1.5 for sample variability) | 55.6% (64G) |
+| CPU | 67.7% (11) | 12 | 64% (11) | 12 | 98.7% (16) | 12 + 4x (nRep-1) | 88.4% (14) |
+| runtime | 2hr | 2.4h x tas for c instance | 1hr 20min | 1.6h x tas for c5 instance | 1hr 45min | 1.6hx tas + 0.4x (nRep-1) for c5 instance | 1hr 42min |
+| instance | c4.4xlarge | c5.4xlarge (32GB mem, 16 cores, $0.68/hr) | c5.4xlarge | c5.4xlarge | c5.4xlarge | c5.4xlarge | c5.4xlarge |
+| estimated runtime on recommended instance | - | 2.4h x tas (2hr for the current input) | - | 1.6h x tas | - | 1.6hx tas + 0.4x (nRep-1) | - |
+| output size | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G | 1.6x tas | 1.3G (sig_fc) + 9.3MB x 2 (bb) = 1.3G |
+| AWSEM job id | R6NetOYXEmq8 | - | JayG50nKBqXT | - | cINxqwUSnLz8 | - | uNNyAk2HU3fw |
+| cost | $1.67 | - | $0.9 | ~$1 per GB tas | $1.2 | ~$1 per GB tas + $0.3x (nRep-1) | $1.17 |
 
